@@ -31,14 +31,14 @@ def connect_to_google_sheet():
 
 # Twilio SMS alert function (no changes here)
 def send_sms_alert(lpg_container_id, balance_percentage, supplier_phone_number, customer_name, customer_phone):
-    account_sid = st.secrets["twilio"]["ACe55faccc9332af6d453f7d000995da61"]
-    auth_token = st.secrets["twilio"]["faf00e1095e3df297aec655a4846a7af"]
+    account_sid = st.secrets["twilio"]["account_sid"]
+    auth_token = st.secrets["twilio"]["auth_token"]
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
         body=f"LPG Container {lpg_container_id} for customer {customer_name} is at {balance_percentage}% balance. "
              f"Please prepare for delivery. Contact customer at {customer_phone}.",
-        from_=st.secrets["twilio"]["15136665539"],
+        from_=st.secrets["twilio"]["from"],
         to=supplier_phone_number
     )
 
